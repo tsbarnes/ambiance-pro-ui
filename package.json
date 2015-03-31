@@ -3,9 +3,18 @@
   "theme": "ui",
   "version": "0.30.0",
   "description": "Gnome 3 Adwaita theme integration based on atom-light-ui",
-  "repository": "https://github.com/adrusi/adwaita-ui.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrusi/adwaita-ui.git"
+  },
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/adrusi/adwaita-ui/issues"
+  },
+  "homepage": "https://github.com/adrusi/adwaita-ui"
   }
 }
