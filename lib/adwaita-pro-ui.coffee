@@ -9,6 +9,7 @@ module.exports =
         'Cantarell',
         'Sans Serif',
         'DejaVu Sans',
+        'Oxygen-Sans',
         'gtk-3'
       ]
     fontSize:
