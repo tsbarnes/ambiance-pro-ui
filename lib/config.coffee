@@ -4,29 +4,34 @@ ini = require 'ini'
 
 module.exports =
 
-  apply: () ->
+  apply: ->
 
     atomWorkspace = document.querySelector('atom-workspace')
 
-
     atomWorkspace.style.fontSize = ""
-    # functions
 
     isManualFontSize = (fontSize) -> fontSize? and fontSize isnt -1
 
-    applyFont = (font) ->
+    updateFont = () ->
+      font = atom.config.get('adwaita-pro-ui.fontFamily')
+      console.log font
       if font is 'gtk-3'
         loadGtkFont()
       else
         atomWorkspace.style.fontFamily = font
 
-    applyFontSize = (size) ->
+    updateFontSize = () ->
+      size = atom.config.get('adwaita-pro-ui.fontSize')
       if isManualFontSize(size)
         atomWorkspace.style.fontSize = "#{size}px"
       else if atom.config.get('adwaita-pro-ui.fontFamily') is 'gtk-3'
         loadGtkFont()
       else
         atomWorkspace.style.fontSize = ""
+
+    updateIcons = () ->
+      iconTheme = atom.config.get('adwaita-pro-ui.iconTheme') or 'No Icons'
+      atomWorkspace.setAttribute('data-adwaita-pro-ui-icon-theme', iconTheme.toLowerCase().replace(/\ /g, '-'))
 
     loadGtkFont = () ->
       fs.readFile path.join(process.env.HOME, '.config/gtk-3.0/settings.ini'), {encoding: 'utf-8'}, (err, raw) ->
@@ -40,13 +45,12 @@ module.exports =
 
 
     # run when atom is ready
-    applyFont(atom.config.get('adwaita-pro-ui.fontFamily'))
-    applyFontSize(atom.config.get('adwaita-pro-ui.fontSize'))
+    updateFont()
+    updateFontSize()
+    updateIcons()
 
     # run when configs change
 
-    atom.config.onDidChange 'adwaita-pro-ui.fontFamily', ->
-      applyFont(atom.config.get('adwaita-pro-ui.fontFamily'))
-
-    atom.config.onDidChange 'adwaita-pro-ui.fontSize', ->
-      applyFontSize(atom.config.get('adwaita-pro-ui.fontSize'))
+    atom.config.onDidChange 'adwaita-pro-ui.fontFamily', updateFont
+    atom.config.onDidChange 'adwaita-pro-ui.fontSize', updateFontSize
+    atom.config.onDidChange 'adwaita-pro-ui.iconTheme', updateIcons

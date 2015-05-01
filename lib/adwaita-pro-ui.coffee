@@ -16,6 +16,15 @@ module.exports =
       description: 'Set to -1 for auto'
       type: 'number'
       default: '-1'
+    iconTheme:
+      type: 'string'
+      default: 'No Icons'
+      enum: [
+        'No Icons',
+        'Octicons',
+        # 'Adwaita',
+        # 'Breeze'
+      ]
 
   activate: (state) ->
     # code in separate file so deferral keeps activation time down
