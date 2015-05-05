@@ -29,3 +29,33 @@ atom-workspace {
     }
   }
 }
+
+
+.scrollbars-overlay {
+  &::-webkit-scrollbar-track {
+    border-style: none;
+    background-color: transparent;
+
+    margin-top: @_slider_margin - 1px;
+    margin-bottom: @_slider_margin - 1px;
+  }
+
+  &::-webkit-scrollbar {
+    opacity: 0.4;
+    width: 5px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+  /*.slider*/
+    border-radius: 100px;
+    margin: @_slider_margin;
+
+    border: 1px solid white;
+    background-color: #2e3436;
+    background-clip: padding-box;
+  }
+}
+
+
+}
