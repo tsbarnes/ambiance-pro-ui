@@ -31,6 +31,7 @@ body.file-icons-colourless .tree-view {
 body.file-icons-on-changes .tree-view {
 	.file.entry.list-item:not(.status-modified) {
 		.name.icon:before { color: @tree-view-icon-color !important;}
+		&.selected .name.icon:before { color: inherit !important;}
 	}
 	.entry.list-item.status-modified {
 		.icon:before { color: inherit !important; }
