@@ -14,6 +14,35 @@
 		color: #fff !important;
 	}
 }
+.tree-view {
+	.icon:before { color: @tree-view-icon-color !important; }
+}
+.list-group, .list-tree{
+
+	li:not(.list-nested-item).status-ignored,
+	li.list-nested-item.status-ignored > .list-item {
+		.icon:before { color: inherit!important; }
+	}
+}
+/* selector precedence hacks for working with file-icons package */
+body.file-icons-colourless .tree-view {
+	.icon:before { color: @tree-view-icon-color !important; }
+}
+body.file-icons-on-changes .tree-view {
+	.file.entry.list-item:not(.status-modified) {
+		.name.icon:before { color: @tree-view-icon-color !important;}
+	}
+	.entry.list-item.status-modified {
+		.icon:before { color: inherit !important; }
+	}
+	.list-group, .list-tree {
+		li:not(.list-nested-item).status-modified,
+		li.list-nested-item.status-modified > .list-item {
+			.icon:before { color: inherit !important; }
+		}
+	}
+}
+
 [data-adwaita-pro-ui-icon-theme='no-icons'] {
 	.tree-view {
 		.icon:before { display: none;}
