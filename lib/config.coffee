@@ -14,7 +14,6 @@ module.exports =
 
     updateFont = () ->
       font = atom.config.get('adwaita-pro-ui.fontFamily')
-      console.log font
       if font is 'gtk-3'
         loadGtkFont()
       else

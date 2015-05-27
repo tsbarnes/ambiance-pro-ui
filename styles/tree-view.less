@@ -29,7 +29,7 @@ body.file-icons-colourless .tree-view {
 	.icon:before { color: @tree-view-icon-color !important; }
 }
 body.file-icons-on-changes .tree-view {
-	.file.entry.list-item:not(.status-modified) {
+	.file.entry.list-item:not(.status-modified):not(.status-added) {
 		.name.icon:before { color: @tree-view-icon-color !important;}
 		&.selected .name.icon:before { color: inherit !important;}
 	}
