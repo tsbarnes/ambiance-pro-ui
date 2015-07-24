@@ -3,6 +3,7 @@
   "theme": "ui",
   "version": "1.0.0",
   "description": "Gnome 3 Adwaita theme integration based on atom-light-ui",
+  "keywords": ["gnome", "adwaita", "ui", "light", "settings", "customizable", "native", "integration"],
   "main": "lib/adwaita-pro-ui",
   "repository": {
     "type": "git",
