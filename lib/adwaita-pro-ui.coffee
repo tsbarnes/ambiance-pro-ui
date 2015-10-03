@@ -10,6 +10,7 @@ module.exports =
         'Sans Serif',
         'DejaVu Sans',
         'Oxygen-Sans',
+        'Droid Sans',
         'gtk-3'
       ]
     fontSize:
