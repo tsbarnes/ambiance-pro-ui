@@ -7,16 +7,16 @@
 @tab-total-height: @tab-top-margin + @tab-height;
 @tab-bg-gradient-spacing: @tab-total-height - 1px;
 
-@tab-bar-shadow: inset 0 4px 4px -2px rgba(0,0,0, .15);
-@tab-active-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.10);
-@tab-hover-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.05);
+@tab-bar-shadow: inset 0 4px 4px -2px fade(@text_color, 15%);
+@tab-active-shadow: inset 0 4px 4px -2px fade(@text_color, 10%);
+@tab-hover-shadow: inset 0 4px 4px -2px fade(@text_color, 5%);
 @modified-icon-width: 8px;
 
 @tab-bar-background: repeating-linear-gradient(to bottom,
   @tab-bar-background-color,
   @tab-bar-background-color @tab-bg-gradient-spacing,
-  #a1a1a1 @tab-bg-gradient-spacing,
-  #a1a1a1 @tab-bg-gradient-spacing + 1px);
+  @borders_color @tab-bg-gradient-spacing,
+  @borders_color @tab-bg-gradient-spacing + 1px);
 
 .tab-bar {
   height: auto;
@@ -87,8 +87,8 @@
       border-bottom-width: 3px;
     }
     &.active:hover {
-      background-color: #E6E6E6;
-      box-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.04);
+      background-color: @bg_color;
+      box-shadow: inset 0 4px 4px -2px fade(@text_color, 4%);
     }
     &.active .title {
       padding-right: 0;
@@ -96,7 +96,7 @@
 
     .close-icon {
       top: 0px;
-      color: #ABADAD;
+      color: fade(@text-color, 40%);
       &::before {
         padding-top: 2px;
         width: 19px;
@@ -106,34 +106,34 @@
       &:active {
         &::before {
           padding-top: 2px;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0));
-          border: 1px solid #A5A5A5;
+          background: linear-gradient(to bottom, fade(@text_color, 10%), fade(@text_color, 0%));
+          border: 1px solid @button-border-color;
         }
       }
       &:hover {
         &::before {
-          border: 1px solid #A5A5A5;
+          border: 1px solid @button-border-color;
         }
-        color: #5B5C54;
+        color: @text-color;
       }
     }
     &.modified:hover .close-icon {
       &:hover {
-        color: #5B5C54;
+        color: @text-color;
       }
       &::before {
         padding-top: 3px;
-        box-shadow: inset 0 0 2px 2px rgba(67, 130, 195, 0.45);
+        box-shadow: inset 0 0 2px 2px fade(@tab-highlight-color, 45%);
       }
       &:hover::before {
         padding-top: 2px;
       }
 
       &:active::before {
-        background: linear-gradient(to bottom, rgba(67, 130, 195, 0.3), rgba(67, 130, 195, 0.15) 30%, rgba(67, 130, 195, 0.05));
+        background: linear-gradient(to bottom, fade(@tab-highlight-color, 30%), fade(@tab-highlight-color, 15%) 30%, fade(@tab-highlight-color, 5%));
         box-shadow: none;
       }
-      color: #ABADAD;
+      color: @text-color;
     }
     &.modified:not(:hover) .close-icon {
       right: 15px;
