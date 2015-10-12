@@ -1,47 +1,77 @@
 @import "ui-variables";
 
 @tab-height: 35px;
+
+@tab-top-margin: 1px;
+@tab-height: 34px;
+@tab-total-height: @tab-top-margin + @tab-height;
+@tab-bg-gradient-spacing: @tab-total-height - 1px;
+
 @tab-bar-shadow: inset 0 4px 4px -2px rgba(0,0,0, .15);
+@tab-active-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.10);
+@tab-hover-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.05);
 @modified-icon-width: 8px;
 
+@tab-bar-background: repeating-linear-gradient(to bottom,
+  @tab-bar-background-color,
+  @tab-bar-background-color @tab-bg-gradient-spacing,
+  #a1a1a1 @tab-bg-gradient-spacing,
+  #a1a1a1 @tab-bg-gradient-spacing + 1px);
+
 .tab-bar {
-  height: @tab-height;
-  background: @tab-bar-background-color;
+  height: auto;
+  background: @tab-bar-background;
   box-shadow: @tab-bar-shadow;
   border-bottom: 1px solid @tab-bar-border-color;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
-  padding: 0 10px;
+  flex-wrap: wrap;
+  padding: 0 5px;
+  margin-top: -@tab-top-margin;
   position: relative;
+  margin-bottom: -1px;
   .tab {
     -webkit-flex: auto;
     flex: auto;
     display: block;
     max-width: none;
     text-align: center;
-    line-height: @tab-height - 1;
-    height: @tab-height - 1;
+    line-height: @tab-height;
+    height: @tab-total-height;
     border-width: 0 1px 2px 1px;
     border-color: transparent;
     border-style: solid;
+    padding-top: @tab-top-margin;
+    padding-right: 30px;
     font-weight: bold;
     font-size: inherit;
     color: @tab-bar-text-color;
     position: relative;
     z-index: 0;
-    &:not(:last-child) {
-      margin-right: -1px;
+
+    margin-left: 4px;
+    margin-right: 4px;
+
+    .title {
+      &::before {
+        font-weight: normal;
+      }
     }
+
     &:hover {
+      background: @tab-background-color-hover;
       border-color:
         transparent
-        #d2d5d2
-        #c1c4c1
-        #d2d5d2;
+        @tab-hover-border-color
+        @tab-hover-highlight-color
+        @tab-hover-border-color;
       color: @tab-bar-text-color-hover;
+      border-bottom-width: 3px;
+      box-shadow: @tab-hover-shadow;
     }
+
     &.active, &.active:hover {
       -webkit-flex: auto;
       flex: auto;
@@ -52,12 +82,63 @@
         @tab-highlight-color
         @tab-border-color;
       background: @tab-background-color-active;
-      box-shadow: @tab-bar-shadow;
+      box-shadow: @tab-active-shadow;
       color: @tab-bar-text-color-active;
+      border-bottom-width: 3px;
+    }
+    &.active:hover {
+      background-color: #E6E6E6;
+      box-shadow: inset 0 4px 4px -2px rgba(0, 0, 0, 0.04);
+    }
+    &.active .title {
+      padding-right: 0;
+    }
+
+    .close-icon {
+      top: 0px;
+      color: #ABADAD;
+      &::before {
+        padding-top: 2px;
+        width: 19px;
+        height: 19px;
+        border-radius:3px;
+      }
+      &:active {
+        &::before {
+          padding-top: 2px;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0));
+          border: 1px solid #A5A5A5;
+        }
+      }
+      &:hover {
+        &::before {
+          border: 1px solid #A5A5A5;
+        }
+        color: #5B5C54;
+      }
+    }
+    &.modified:hover .close-icon {
+      &:hover {
+        color: #5B5C54;
+      }
+      &::before {
+        padding-top: 3px;
+        box-shadow: inset 0 0 2px 2px rgba(67, 130, 195, 0.45);
+      }
+      &:hover::before {
+        padding-top: 2px;
+      }
+
+      &:active::before {
+        background: linear-gradient(to bottom, rgba(67, 130, 195, 0.3), rgba(67, 130, 195, 0.15) 30%, rgba(67, 130, 195, 0.05));
+        box-shadow: none;
+      }
+      color: #ABADAD;
     }
     &.modified:not(:hover) .close-icon {
-      // right: 0;
-      top: @tab-height/2 - @modified-icon-width/2 + 1px;
+      right: 15px;
+      // top: 12.5px;
+      top: @tab-total-height/2 - @modified-icon-width/2 - 1px;
       width: @modified-icon-width;
       height: @modified-icon-width;
     }
