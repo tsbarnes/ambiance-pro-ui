@@ -3,6 +3,11 @@
 
 // @ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 // TODO: see _drawing.scss from gtk's theme files, gradients are quite different
+
+// a {
+//   .gtk-button(undecorated, @button-background-color, @text-color);
+// }
+
 .btn-background (@color, @text-color) {
   // TODO:
   // transition: all 200ms @ease-out-quad
@@ -10,10 +15,6 @@
   border-radius: 3px;
   // padding: 5px 8px 6px;
   .gtk-button(normal, @color, @text-color);
-  &.flat {
-    .gtk-button(undecorated, @color, @text-color);
-  }
-
   &:hover {
     .gtk-button(hover, @color, @text-color);
   }
@@ -29,40 +30,21 @@
   }
 }
 
-.btn-variant (@color) {
-  @bg: darken(@color, 10%);
-  .btn-background(@bg, @text-color-selected);
+// TODO: improve settings-view
+.btn.status-indicator {
+  ._widget_edge(@borders_edge);
+  box-shadow: @_widget_edge;
 }
+
 
 .btn {
   .btn-background(@button-background-color, @text-color);
 }
-
-.btn.btn-primary {
-  .btn-variant(@selected_bg_color);
-}
-.btn.btn-info {
-  .btn-variant(@selected_bg_color);
-}
-.btn.btn-success {
-  .btn-variant(@background-color-success);
-}
-.btn.btn-warning {
-  .btn-variant(@background-color-warning);
-}
-.btn.btn-error {
-  .btn-variant(@background-color-error);
-}
-
-.btn-group {
-
-}
-
 .btn-group {
   & > .btn, & > .btn.selected {
-    border-right-style: none;
     ._button_border_color_val(@button-background-color);
     border-left: 1px solid @_border_color;
+    border-right-style: none;
     &:first-child {
       ._button_border_color_val(@button-background-color);
       border-left: 1px solid @_border_color;
@@ -77,6 +59,33 @@
     }
   }
 }
+
+.btn-variant (@subclass, @color) {
+  @bg: darken(@color, 10%);
+
+  .btn.@{subclass} {
+    .btn-background(@bg, @text-color-selected);
+  }
+  .btn-group {
+    & > .btn.@{subclass}, & > .btn.@{subclass}.selected {
+      ._button_border_color_val(@bg);
+      border-left: 1px solid @_border_color;
+      &:first-child {
+        ._button_border_color_val(@bg);
+        border-left: 1px solid @_border_color;
+      }
+      &:last-child {
+        ._button_border_color_val(@bg);
+        border-right: 1px solid @_border_color;
+      }
+    }
+  }
+}
+.btn-variant(btn-primary, @selected_bg_color);
+.btn-variant(btn-info, @selected_bg_color);
+.btn-variant(btn-success, @background-color-success);
+.btn-variant(btn-warning, @background-color-warning);
+.btn-variant(btn-error, @background-color-error);
 
 .btn-group {
   .btn, .btn-group {
