@@ -1,3 +1,6 @@
+initCount = 0
+themeConfig = null
+
 module.exports =
 
   config:
@@ -42,6 +45,15 @@ module.exports =
 
   activate: (state) ->
     # code in separate file so deferral keeps activation time down
-    atom.themes.onDidChangeActiveThemes ->
-      Config = require './config'
-      Config.apply()
+    initCount++
+    _initCount = initCount
+    setTimeout ->
+      if _initCount isnt initCount then return
+      ThemeConfig = require './config'
+      console.log("Loading adwaita-pro-ui...")
+      themeConfig = new ThemeConfig()
+      themeConfig.init()
+    , 10
+  deactivate: (state) ->
+    themeConfig?.destroy()
+    themeConfig = null
