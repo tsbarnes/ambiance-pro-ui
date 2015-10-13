@@ -1,12 +1,8 @@
 # Adwaita UI
-Adwaita is the default gtk theme for the GNOME 3 desktop. This Atom UI theme is
-a derivative of the atom-light-ui theme that adds integration with the Adwaita
-theme. Currently it changes the tab style, the scrollbars and the tree view.
+Adwaita is the default gtk theme for the GNOME 3 desktop. This Atom UI theme
+attempts to perfectly emulate the native styling for gnome, and has light and
+dark variants available.
 
-![Screenshot of the theme](https://raw.githubusercontent.com/forivall/adwaita-pro-ui/master/screenshot.png)
+![Light Screenshot](http://i.imgur.com/Ss0iJhp.png)
 
-## Tabs
-Many current (as of 8 July 2014) distributions use older versions of the GNOME 3
-desktop, which used a different, trapezoidal tab shape. I chose to use the newer
-rectangular tab shape that comes with new versions of GNOME, such as the version
-currently available in the official Arch Linux repositories, 3.12.
+![Dark Screenshot](http://i.imgur.com/oe69OmF.png)
