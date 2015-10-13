@@ -37,6 +37,9 @@
   li.list-nested-item.selected > .list-item {
     .text(selected);
   }
+  .selected::before {
+    background-color: @background-color-selected;
+  }
 }
 
 .select-list ol.list-group,
