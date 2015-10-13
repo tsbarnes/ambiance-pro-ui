@@ -1,3 +1,19 @@
+@import "syntax-variables";
+@import "gtk_style";
+// @_gtk-style: light;
+.set_gtk_colors(auto) when (lightness(@syntax-background-color) <= 50%) {
+  @_gtk-style: dark;
+}
+.set_gtk_colors(auto) when (lightness(@syntax-background-color) > 50%) {
+  @_gtk-style: light;
+}
+.set_gtk_colors(light) {
+  @_gtk-style: light;
+}
+.set_gtk_colors(dark) {
+  @_gtk-style: dark;
+}
+.set_gtk_colors(@gtk-style);
 // gtk adwaita "colors.scss"
 .gtk_colors (dark) {
   @base_color: #292929;
@@ -95,7 +111,7 @@
 
   @backdrop_scrollbar_bg_color: darken(@backdrop_bg_color, 3%);
 }
-.gtk_colors(light);
+.gtk_colors(@_gtk-style);
 // end of gtk core colors
 
 // Colors

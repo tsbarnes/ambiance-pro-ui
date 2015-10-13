@@ -1,7 +1,18 @@
 module.exports =
 
   config:
+    theme:
+      title: 'Theme'
+      description: 'Use the dark or light adwaita color theme. Auto will guess based on your syntax theme.'
+      type: 'string'
+      default: 'auto'
+      enum: [
+        'auto',
+        'light',
+        'dark',
+      ]
     fontFamily:
+      title: 'Font Family'
       description: 'Experimental: set to gtk-3 to load the font settings from ~/.config/gtk-3.0/settings.ini'
       type: 'string'
       default: 'Cantarell'
@@ -14,10 +25,12 @@ module.exports =
         'gtk-3'
       ]
     fontSize:
+      title: 'Font Size'
       description: 'Set to -1 for auto'
       type: 'number'
       default: '-1'
     iconTheme:
+      title: 'Icon Theme'
       type: 'string'
       default: 'No Icons'
       enum: [
