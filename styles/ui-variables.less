@@ -1,17 +1,17 @@
 @import "syntax-variables";
 @import "gtk_style";
-// @_gtk-style: light;
+// @variant: light;
 .set_gtk_colors(auto) when (lightness(@syntax-background-color) <= 50%) {
-  @_gtk-style: dark;
+  @variant: dark;
 }
 .set_gtk_colors(auto) when (lightness(@syntax-background-color) > 50%) {
-  @_gtk-style: light;
+  @variant: light;
 }
 .set_gtk_colors(light) {
-  @_gtk-style: light;
+  @variant: light;
 }
 .set_gtk_colors(dark) {
-  @_gtk-style: dark;
+  @variant: dark;
 }
 .set_gtk_colors(@gtk-style);
 // gtk adwaita "colors.scss"
@@ -25,7 +25,7 @@
   @selected_bg_color: darken(#4a90d9,20%);
   @selected_borders_color: darken(@selected_bg_color, 20%);
   @borders_color: darken(@bg_color,12%);
-  @borders_edge: fadeout(@fg_color, 0.9);
+  @borders_edge: fadeout(@fg_color, 90%);
   @link_color: lighten(@selected_bg_color,20%);
   @link_visited_color: lighten(@selected_bg_color,10%);
 
@@ -43,7 +43,7 @@
 
   @sidebar_bg_color: lighten(@bg_color,5%);
 
-  @tooltip_borders_color: fadeout(white, 0.9);
+  @tooltip_borders_color: fadeout(white, 90%);
 
   //insensitive state derived colors
   @insensitive_fg_color: mix(@fg_color, @bg_color, 50%);
@@ -111,7 +111,7 @@
 
   @backdrop_scrollbar_bg_color: darken(@backdrop_bg_color, 3%);
 }
-.gtk_colors(@_gtk-style);
+.gtk_colors(@variant);
 // end of gtk core colors
 
 // Colors

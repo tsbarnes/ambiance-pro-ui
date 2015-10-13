@@ -1,53 +1,48 @@
 @import "ui-variables";
 @import "ui-mixins";
 
+// @ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 // TODO: see _drawing.scss from gtk's theme files, gradients are quite different
-.btn-background (@color, @hover-color, @selected-color, @border-color, @text-color, @text-color-hover) {
-  @border-shadow: inset 0 0 0 1px @border-color;
-  @active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-  color: @text-color;
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(@color, darken(@color, 8%));
-  box-shadow: @border-shadow;
+.btn-background (@color, @text-color) {
+  // TODO:
+  // transition: all 200ms @ease-out-quad
+  border: 1px solid;
+  border-radius: 3px;
+  // padding: 5px 8px 6px;
+  .gtk-button(normal, @color, @text-color);
+  &.flat {
+    .gtk-button(undecorated, @color, @text-color);
+  }
 
   &:hover {
-    color: @text-color-hover;
-    background-image: -webkit-linear-gradient(@hover-color, darken(@hover-color, 8%));
+    .gtk-button(hover, @color, @text-color);
   }
   &:active,
-  &.selected:hover:active {
-    box-shadow: @active-shadow, @border-shadow;
-  }
   &.selected,
-  &.selected:hover {
-    color: @text-color-selected;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0,.3), @border-shadow;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    background-image: -webkit-linear-gradient(darken(@selected-color, 8%), @selected-color);
+  &:checked {
+    .gtk-button(active, @color, @text-color);
+    transition-duration: 50ms;
   }
-  &.selected:hover {
-    box-shadow: @border-shadow;
-    background-image: -webkit-linear-gradient(@selected-color, darken(@selected-color, 8%));
+  &[disabled], &.disabled, &.disabled:hover, &[disabled]:hover {
+    .gtk-button(insensitive, @color, @text-color);
+    opacity: 1;
   }
 }
 
 .btn-variant (@color) {
   @bg: darken(@color, 10%);
-  @hover: @color;
-  @selected: @color;
-  @border: fadeout(darken(@color, 20%), 50%);
-  .btn-background(@bg, @hover, @selected, @border, @text-color-selected, @text-color-selected);
+  .btn-background(@bg, @text-color-selected);
 }
 
 .btn {
-  .btn-background(@button-background-color, @button-background-color-hover, @button-background-color-selected, @button-border-color, @text-color, @text-color-highlight);
+  .btn-background(@button-background-color, @text-color);
 }
 
 .btn.btn-primary {
-  .btn-variant(@background-color-info);
+  .btn-variant(@selected_bg_color);
 }
 .btn.btn-info {
-  .btn-variant(@background-color-info);
+  .btn-variant(@selected_bg_color);
 }
 .btn.btn-success {
   .btn-variant(@background-color-success);
@@ -59,6 +54,34 @@
   .btn-variant(@background-color-error);
 }
 
-.btn-group > .btn {
-  border: none;
+.btn-group {
+
+}
+
+.btn-group {
+  & > .btn, & > .btn.selected {
+    border-right-style: none;
+    ._button_border_color_val(@button-background-color);
+    border-left: 1px solid @_border_color;
+    &:first-child {
+      ._button_border_color_val(@button-background-color);
+      border-left: 1px solid @_border_color;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      ._button_border_color_val(@button-background-color);
+      border-right: 1px solid @_border_color;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+}
+
+.btn-group {
+  .btn, .btn-group {
+    & + .btn, & + .btn-group {
+      margin-left: 0;
+    }
+  }
 }

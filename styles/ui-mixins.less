@@ -38,3 +38,202 @@
   color: @text-color-error;
   text-shadow: none;
 }
+
+
+// adapted from gtk+/gtk/theme/Adwaita/_drawing.scss
+//
+// original: @function _widget_edge($c:$borders_edge) {
+// outer highlight "used" on most widgets
+._widget_edge(@edge, @c:@borders_edge) when (@edge = none) {
+  @_widget_edge: none;
+  @_widget_edge_blank: none;
+}
+._widget_edge(@edge, @c:@borders_edge) when not (@edge = none) {
+  @_widget_edge: 0 1px @c;
+  @_widget_edge_blank: 0 1px @c;
+}
+
+@_button_border_color_darken_amount: 25%;
+._button_border_color_val(@c) when not (@c = @bg_color){
+  @_border_color: darken(@c, @_button_border_color_darken_amount);
+}
+._button_border_color_val(@c) when (@c = @bg_color){
+  @_border_color: @borders_color;
+}
+._button_border_color(@c) {
+  ._button_border_color_val(@c);
+  border-color: @_border_color;
+}
+
+// original: @function _text_shadow_color ($tc:$fg_color, $bg:$bg_color) {
+//
+// calculate the color of text shadows
+//
+// $tc is the text color
+// $bg is the background color
+//
+._text_shadow_color(@tc:@fg_color, @bg:@bg_color) when (lightness(@tc) < 50%) {
+  @_lbg: lightness(@bg);
+  // @_shadow: fadeout(white,100%-@_lbg/(@_lbg*130%));
+  @_shadow: fadeout(white,100%-((@_lbg/(@_lbg*1.3)))*100%);
+  // @_shadow: fadeout(white,100%-(@_lbg/1.3));
+}
+._text_shadow_color(@tc:@fg_color, @bg:@bg_color) when not (lightness(@tc) < 50%) {
+  @_lbg: lightness(@bg);
+  @_shadow: fadeout(black,@_lbg*80%);
+}
+
+//
+// original: @function _button_hilight_color($c) {
+//
+// calculate the right top hilight color for buttons
+//
+// $c: base color;
+//
+._button_hilight_color(@c) when (lightness(@c) > 90%) {
+  @_button_hilight_color: white;
+}
+._button_hilight_color(@c) when (lightness(@c) > 80%) and not (lightness(@c) > 90%) {
+  @_button_hilight_color: fadeout(white, 30%);
+}
+._button_hilight_color(@c) when (lightness(@c) > 50%) and not (lightness(@c) > 80%) {
+  @_button_hilight_color: fadeout(white, 50%);
+}
+._button_hilight_color(@c) when (lightness(@c) > 40%) and not (lightness(@c) > 50%) {
+  @_button_hilight_color: fadeout(white, 70%);
+}
+._button_hilight_color(@c) when (default()) {
+  @_button_hilight_color: fadeout(white, 90%);
+}
+// original: @mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
+  //
+  // helper function for the text emboss effect
+  //
+  // $tc is the optional text color, not the shadow color
+  //
+  // TODO: this functions needs a way to deal with special cases
+  //
+._button_text_shadow(@tc:@fg_color, @bg:@bg_color) when (lightness(@tc) < 50%) {
+  ._text_shadow_color(@tc, @bg);
+  text-shadow: 0 1px @_shadow;
+  // icon-shadow: 0 1px @_shadow;
+}
+._button_text_shadow(@tc:@fg_color, @bg:@bg_color) when (default()) {
+  ._text_shadow_color(@tc, @bg);
+  text-shadow: 0 -1px @_shadow;
+  // icon-shadow: 0 -1px @_shadow;
+}
+
+// original: @mixin button()
+// Button drawing function
+//
+// $t:    button type,
+// $c:    base button color for colored* types
+// $tc:   optional text color for colored* types
+// $edge: set to none to not draw the bottom edge or specify a color to not
+//        use the default one
+//
+._gtk-button(@c, @tc, @edge) {
+
+  ._button_hilight_color(@c);
+  @_hilight_color: @_button_hilight_color;
+  ._widget_edge(@edge);
+  @_button_edge: @_widget_edge;
+  @_blank_edge: @_widget_edge_blank;
+}
+.gtk-button(normal, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
+  ._gtk-button(@c, @tc, @edge);
+
+  color: @tc;
+  outline-color: fadeout(@tc, 70%);
+  ._button_border_color(@c);
+  background-image: linear-gradient(to bottom,
+                                lighten(@c,5%),
+                                @c 40%,
+                                darken(@c,5%)
+                                );
+  ._button_text_shadow(@tc,@c);
+  box-shadow: inset 0 1px @_hilight_color, @_button_edge;
+}
+.gtk-button(hover, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
+  // hovered button
+  ._gtk-button(@c, @tc, @edge);
+
+  color: @tc;
+  outline-color: fadeout(@tc, 70%);
+  ._button_border_color(@c);
+  background-image: linear-gradient(to bottom,
+                                    lighten(@c,14%),
+                                    lighten(@c,4%) 40%,
+                                    @c);
+
+  ._button_text_shadow(@tc,lighten(@c,4%));
+  box-shadow: inset 0 1px @_hilight_color, @_button_edge;
+}
+.gtk-button(active, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
+  // pushed button
+  ._gtk-button(@c, @tc, @edge);
+
+  color: @tc;
+  outline-color: fadeout(@tc, 70%);
+  ._button_border_color(@c);
+  background-image: linear-gradient(to bottom,
+                                    darken(@c,9%),
+                                    darken(@c,6.6%) 40%,
+                                    darken(@c,5%));
+  ._button_text_shadow(@tc,darken(@c,10%));
+  box-shadow: inset 0 1px fadeout(black, 93%),
+              inset 0 2px 1px -2px fadeout(black,40%),
+              @_button_edge;
+}
+
+._insensitive_gtk_button_bg(@c) when not (@c = @bg_color) { @_bg: mix(@c,@base_color,85%); }
+._insensitive_gtk_button_bg(@c) when (@c = @bg_color) { @_bg: @insensitive_bg_color; }
+._insensitive_gtk_button_color(@tc) when not (@tc = @fg_color) { color: mix(@tc, @bg, 50%); }
+._insensitive_gtk_button_color(@tc) when (@tc = @fg_color) { color: @insensitive_fg_color; }
+._insensitive_gtk_button_border_color(@c) when not (@c = @bg_color) { ._button_border_color(@c); }
+._insensitive_gtk_button_border_color(@c) when (@c = @bg_color) { border-color: @insensitive_borders_color; }
+.gtk-button(insensitive, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
+  // insensitive button
+  ._gtk-button(@c, @tc, @edge);
+  ._insensitive_gtk_button_bg(@c);
+  ._insensitive_gtk_button_color(@tc);
+  ._insensitive_gtk_button_border_color(@c);
+  background-image: linear-gradient(to bottom, @_bg, @_bg);
+  text-shadow: none;
+  // white with 0 alpha to avoid an ugly transition, since no color means
+  // black with 0 alpha
+  box-shadow: inset 0 1px fadeout(white,100%), @_button_edge;
+  & > .label { color: inherit; }
+}
+.backdrop_gtk_button_bg(@c) when not (@c = @bg_color) { @_bg: darken(@c,10%); }
+.backdrop_gtk_button_bg(@c) when (@c = @bg_color) { @_bg: @backdrop_dark_fill; }
+.backdrop_gtk_button_color(@c) when not (@c = @fg_color) { color: mix(@tc, @_bg, 80%); }
+.backdrop_gtk_button_color(@c) when (@c = @fg_color) { color: @backdrop_borders_color; }
+.backdrop_gtk_button_border_color(@c) when (@variant = light) and not (@c = @bg_color) { border-color: @_bg; }
+.backdrop_gtk_button_border_color(@c) when (@variant = dark) and not (@c = @bg_color) { ._button_border_color(@c); }
+.backdrop_gtk_button_border_color(@c) when (default()) { border-color: @backdrop_borders_color; }
+.gtk-button(backdrop-active, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
+  //
+  // backdrop pushed button FIXME no colors here!
+  //
+  .backdrop_gtk_button_bg(@c);
+  .backdrop_gtk_button_color(@c);
+  .backdrop_gtk_button_border_color(@c);
+  background-image: linear-gradient(to bottom, @_bg);
+  box-shadow: inset 0 1px fadeout(white,100%),
+              @_blank_edge;
+  }
+.gtk-button(undecorated, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
+  // reset
+  ._gtk-button(@c, @tc, @edge);
+
+  border-color: transparent;
+  background-color: transparent;
+  background-image: none;
+
+  box-shadow: inset 0 1px fadeout(white, 1), @_blank_edge;
+
+  text-shadow: none;
+  icon-shadow: none;
+}
