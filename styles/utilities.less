@@ -2,7 +2,7 @@
 @import "ui-variables";
 
 .key-binding {
-  background: #fff;
+  background: @base_color;
   border: 1px solid lighten(@base-border-color, 20%);
   text-shadow: none;
   display: inline-block;
@@ -16,5 +16,5 @@
 
 .badge {
   .text(highlight);
-  background: @background-color-selected;
+  background: fade(@background-color-selected, 50%);
 }
