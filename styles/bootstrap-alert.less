@@ -1,0 +1,79 @@
+@state-success-text: @text-color-success;
+@state-success-bg: mix(@background-color-success, @base-background-color, 25%);
+@state-success-border: mix(@text-color, spin(@state-success-bg, -10), 5%);
+
+@state-info-text: @text-color-info;
+@state-info-bg: mix(@background-color-info, @base-background-color, 25%);
+@state-info-border: mix(@text-color, spin(@state-info-bg, -10), 7%);
+
+@state-warning-text: @text-color-warning;
+@state-warning-bg: mix(@background-color-warning, @base-background-color, 25%);
+@state-warning-border: mix(@text-color, spin(@state-warning-bg, -10), 5%);
+
+@state-danger-text: @text-color-error;
+@state-danger-bg: mix(@background-color-error, @base-background-color, 25%);
+@state-danger-border: mix(@text-color, spin(@state-danger-bg, -10), 5%);
+
+// from bootstrap/less/variables.less
+
+@alert-success-bg:            @state-success-bg;
+@alert-success-text:          @state-success-text;
+@alert-success-border:        @state-success-border;
+
+@alert-info-bg:               @state-info-bg;
+@alert-info-text:             @state-info-text;
+@alert-info-border:           @state-info-border;
+
+@alert-warning-bg:            @state-warning-bg;
+@alert-warning-text:          @state-warning-text;
+@alert-warning-border:        @state-warning-border;
+
+@alert-danger-bg:             @state-danger-bg;
+@alert-danger-text:           @state-danger-text;
+@alert-danger-border:         @state-danger-border;
+
+// from bootstrap/less/mixins/alerts.less
+// Alerts
+
+.alert-variant(@background; @border; @text-color) {
+  background-color: @background;
+  border-color: @border;
+  color: @text-color;
+
+  hr {
+    border-top-color: darken(@border, 5%);
+  }
+  .alert-link {
+    color: darken(@text-color, 10%);
+  }
+}
+
+// from bootstrap/less/alerts.less
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the alert.
+
+.alert-success {
+  .alert-variant(@alert-success-bg; @alert-success-border; @alert-success-text);
+}
+
+.alert-info {
+  .alert-variant(@alert-info-bg; @alert-info-border; @alert-info-text);
+}
+
+.alert-warning {
+  .alert-variant(@alert-warning-bg; @alert-warning-border; @alert-warning-text);
+}
+
+.alert-danger {
+  .alert-variant(@alert-danger-bg; @alert-danger-border; @alert-danger-text);
+}
+
+// custom tweaks
+
+.alert {
+  .btn {
+    margin-top: -4px;
+  }
+}

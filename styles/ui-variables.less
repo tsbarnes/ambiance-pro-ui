@@ -121,7 +121,7 @@
 @text-color-highlight: @text_color;
 @text-color-selected: @selected_fg_color;
 
-@text-color-info: mix(@selected_bg_color, @text_color, 90%);
+@text-color-info: mix(@selected_bg_color, @text_color, 70%);
 @text-color-success: @success_color;
 @text-color-warning: @warning_color;
 @text-color-error: @destructive_color;
@@ -132,10 +132,11 @@
 @text-color-modified: @text-color-warning;
 @text-color-removed: @text-color-error;
 
-@background-color-info: fadeout(@text-color-info, 15%);
-@background-color-success: fadeout(@success_color, 15%);
-@background-color-warning: fadeout(@warning_color, 15%);
-@background-color-error: fadeout(@destructive_color, 15%);
+@background-color-info: fade(mix(@text-color-info, @base-background-color, 75%), 85%);
+@background-color-success: fade(mix(@success_color, @base-background-color, 75%), 85%);
+@background-color-warning: fade(mix(@warning_color, @base-background-color, 75%), 85%);
+@background-color-error: fade(mix(@destructive_color, @base-background-color, 75%), 85%);
+
 /* highlighting is the one intentional departure from gtk's styles */
 @background-color-highlight: rgba(0, 0, 0, .06);
 @background-color-selected: @selected_bg_color;
@@ -193,6 +194,7 @@
 @ui-site-color-3: @background-color-warning; // orange
 @ui-site-color-4: #db2ff4; // purple
 @ui-site-color-5: #f5e11d; // yellow
+@ui-error-color: @error_color; // red
 
 @scrollbar-background-color: @scrollbar_bg_color;
 @scrollbar-color: mix(@fg_color, @bg_color, 40%);
