@@ -6,7 +6,7 @@ module.exports =
   config:
     theme:
       title: 'Theme'
-      description: 'Use the dark or light adwaita color theme. Auto will guess based on your syntax theme.'
+      description: 'Use the dark or light color theme. Auto will guess based on your syntax theme.'
       type: 'string'
       default: 'auto'
       enum: [
@@ -18,8 +18,9 @@ module.exports =
       title: 'Font Family'
       description: 'Experimental: set to gtk-3 to load the font settings from ~/.config/gtk-3.0/settings.ini'
       type: 'string'
-      default: 'Cantarell'
+      default: 'Ubuntu'
       enum: [
+        'Ubuntu',
         'Cantarell',
         'Sans Serif',
         'DejaVu Sans',
@@ -50,7 +51,7 @@ module.exports =
     setTimeout ->
       if _initCount isnt initCount then return
       ThemeConfig = require './config'
-      console.log("Loading adwaita-pro-ui...")
+      console.log("Loading ambiance-pro-ui...")
       themeConfig = new ThemeConfig()
       themeConfig.init()
     , 10

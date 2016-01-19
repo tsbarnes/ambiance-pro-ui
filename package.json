@@ -1,11 +1,14 @@
 {
-  "name": "adwaita-pro-ui",
+  "name": "ambiance-pro-ui",
   "theme": "ui",
-  "version": "2.1.3",
-  "description": "Gnome 3 Adwaita theme integration",
+  "version": "0.1.0",
+  "description": "Ubuntu Unity Ambiance theme integration",
   "keywords": [
-    "gnome",
-    "adwaita",
+    "ubuntu",
+    "unity",
+    "human",
+    "light-themes",
+    "ambiance",
     "ui",
     "light",
     "dark",
@@ -14,20 +17,20 @@
     "native",
     "integration"
   ],
-  "main": "lib/adwaita-pro-ui",
+  "main": "lib/ambiance-pro-ui",
   "repository": {
     "type": "git",
-    "url": "https://github.com/forivall/adwaita-pro-ui.git"
+    "url": "https://github.com/tsbarnes/ambiance-pro-ui.git"
   },
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">1.3.0"
   },
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/forivall/adwaita-pro-ui/issues"
+    "url": "https://github.com/tsbarnes/ambiance-pro-ui/issues"
   },
-  "homepage": "https://github.com/forivall/adwaita-pro-ui#readme",
+  "homepage": "https://github.com/tsbarnes/ambiance-pro-ui#readme",
   "dependencies": {
     "ini": "^1.3.3"
   }
