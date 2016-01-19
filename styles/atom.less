@@ -7,8 +7,14 @@ atom-workspace {
 
 .scrollbars-visible-always {
   /deep/ ::-webkit-scrollbar {
-    width: 13px;
-    height: 13px;
+    -webkit-appearance: none;
+    width: 5px;
+    height: 5px;
+
+    &:hover {
+      width: 13px;
+      height: 13px;
+    }
   }
 
   /deep/ ::-webkit-scrollbar-track,
