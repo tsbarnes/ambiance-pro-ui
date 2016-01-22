@@ -142,49 +142,45 @@
   @_blank_edge: @_widget_edge_blank;
 }
 .gtk-button(normal, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
-  ._gtk-button(@c, @tc, @edge);
+  vertical-align: middle;
+
+  padding: 5px 6px;
+
+  background-image: linear-gradient(left top, left bottom,
+                                   from(shade(@c, 1.08)),
+                                   color-stop(0.5, @c),
+                                   to(shade(@c, 0.94)));
 
   color: @tc;
-  outline-color: fadeout(@tc, 70%);
-  ._button_border_color(@c);
-  background-image: linear-gradient(to bottom,
-                                lighten(@c,5%),
-                                @c 40%,
-                                darken(@c,5%)
-                                );
-  ._button_text_shadow(@tc,@c);
-  box-shadow: inset 0 1px @_hilight_color, @_button_edge;
+  text-shadow: 0 1px alpha(shade(@c, 1.25), 0.4);
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+  border-image-source: url(atom://ambiance-pro-ui/assets/button.png);
+
+  /* all button border images have the same size and are sliced in the same way */
+  border-image-width: 10px 12px 10px 12px;
+  border-image-slice: 10 12 10 12;
+  border-image-repeat: stretch;
 }
 .gtk-button(hover, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
   // hovered button
-  ._gtk-button(@c, @tc, @edge);
+  .gtk-button(normal, @c, @tc, @edge);
 
-  color: @tc;
-  outline-color: fadeout(@tc, 70%);
-  ._button_border_color(@c);
-  background-image: linear-gradient(to bottom,
-                                    lighten(@c,14%),
-                                    lighten(@c,4%) 40%,
-                                    @c);
-
-  ._button_text_shadow(@tc,lighten(@c,4%));
-  box-shadow: inset 0 1px @_hilight_color, @_button_edge;
+  background-image: linear-gradient(left top, left bottom,
+                                   from(shade(@c, 1.12)),
+                                   color-stop(0.5, @c),
+                                   to(shade(@c, 0.96)));
+  border-image-source: url(atom://ambiance-pro-ui/assets/button-hover.png);
 }
 .gtk-button(active, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
   // pushed button
-  ._gtk-button(@c, @tc, @edge);
+  .gtk-button(normal, @c, @tc, @edge);
 
-  color: @tc;
-  outline-color: fadeout(@tc, 70%);
-  ._button_border_color(@c);
-  background-image: linear-gradient(to bottom,
-                                    darken(@c,9%),
-                                    darken(@c,6.6%) 40%,
-                                    darken(@c,5%));
-  ._button_text_shadow(@tc,darken(@c,10%));
-  box-shadow: inset 0 1px fadeout(black, 93%),
-              inset 0 2px 1px -2px fadeout(black,40%),
-              @_button_edge;
+  background-image: linear-gradient(left top, left bottom,
+                                   from (#dcdcdc),
+                                   to (#f3f3f3));
+  border-image-source: url(atom://ambiance-pro-ui/assets/button-active-hover.png);
 }
 
 ._insensitive_gtk_button_bg(@c) when not (@c = @bg_color) { @_bg: mix(@c,@base_color,85%); }
@@ -195,15 +191,15 @@
 ._insensitive_gtk_button_border_color(@c) when (@c = @bg_color) { border-color: @insensitive_borders_color; }
 .gtk-button(insensitive, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
   // insensitive button
-  ._gtk-button(@c, @tc, @edge);
+  .gtk-button(normal, @c, @tc, @edge);
   ._insensitive_gtk_button_bg(@c);
   ._insensitive_gtk_button_color(@tc);
   ._insensitive_gtk_button_border_color(@c);
-  background-image: linear-gradient(to bottom, @_bg, @_bg);
-  text-shadow: none;
-  // white with 0 alpha to avoid an ugly transition, since no color means
-  // black with 0 alpha
-  box-shadow: inset 0 1px fadeout(white,100%), @_button_edge;
+  background-image: none;
+  background-color: mix(#ebebeb, @c, 0.5);
+
+  text-shadow: 0 1px alpha(shade(@c, 1.25), 0.4);
+  border-image-source: url(atom://ambiance-pro-ui/assets/button-disabled.png);
   & > .label { color: inherit; }
 }
 .backdrop_gtk_button_bg(@c) when not (@c = @bg_color) { @_bg: darken(@c,10%); }
@@ -217,16 +213,16 @@
   //
   // backdrop pushed button FIXME no colors here!
   //
-  .backdrop_gtk_button_bg(@c);
-  .backdrop_gtk_button_color(@c);
-  .backdrop_gtk_button_border_color(@c);
-  background-image: linear-gradient(to bottom, @_bg);
-  box-shadow: inset 0 1px fadeout(white,100%),
-              @_blank_edge;
-  }
+  background-image: none;
+  background-color: @c;
+
+  color: @tc;
+  text-shadow: 0 1px alpha(shade(@c, 1.25), 0.2);
+  border-image-source: url(atom://ambiance-pro-ui/assets/backdrop-button-active-hover.png);
+}
 .gtk-button(undecorated, @c:@bg_color, @tc:@fg_color, @edge:@borders_edge) {
   // reset
-  ._gtk-button(@c, @tc, @edge);
+  .gtk-button(normal, @c, @tc, @edge);
 
   border-color: transparent;
   background-color: transparent;

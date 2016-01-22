@@ -4,16 +4,16 @@ themeConfig = null
 module.exports =
 
   config:
-    theme:
-      title: 'Theme'
-      description: 'Use the dark or light color theme. Auto will guess based on your syntax theme.'
-      type: 'string'
-      default: 'auto'
-      enum: [
-        'auto',
-        'light',
-        'dark',
-      ]
+    # theme:
+    #   title: 'Theme'
+    #   description: 'Use the dark or light color theme. Auto will guess based on your syntax theme.'
+    #   type: 'string'
+    #   default: 'auto'
+    #   enum: [
+    #     'auto',
+    #     'light',
+    #     'dark',
+    #   ]
     fontFamily:
       title: 'Font Family'
       description: 'Experimental: set to gtk-3 to load the font settings from ~/.config/gtk-3.0/settings.ini'

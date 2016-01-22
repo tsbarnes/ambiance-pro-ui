@@ -61,20 +61,20 @@ class ThemeConfig
     , reject
 
 
-  setTheme: () => new Promise (resolve, reject) =>
-    themeFile = path.join(__dirname, "../styles/gtk_style.less")
-    theme = atom.config.get('ambiance-pro-ui.theme') or 'auto'
-    fs.readFile themeFile, {encoding: "utf8"}, (err, data) =>
-      if err then return reject(err)
-      currentTheme = /^@gtk-style: (auto|dark|light);/.exec(data)[1]
-      if theme isnt currentTheme
-        fs.writeFile themeFile, "@gtk-style: #{theme};\n", (err) ->
-          if err then return reject(err)
-          reloadTheme().then (-> resolve(false)), reject
-      else if isStartup and theme in ['dark', 'auto']
-        isStartup = false
-        return resolve(true)
-      return resolve(false)
+  # setTheme: () => new Promise (resolve, reject) =>
+  #   themeFile = path.join(__dirname, "../styles/gtk_style.less")
+  #   theme = atom.config.get('ambiance-pro-ui.theme') or 'auto'
+  #   fs.readFile themeFile, {encoding: "utf8"}, (err, data) =>
+  #     if err then return reject(err)
+  #     currentTheme = /^@gtk-style: (auto|dark|light);/.exec(data)[1]
+  #     if theme isnt currentTheme
+  #       fs.writeFile themeFile, "@gtk-style: #{theme};\n", (err) ->
+  #         if err then return reject(err)
+  #         reloadTheme().then (-> resolve(false)), reject
+  #     else if isStartup and theme in ['dark', 'auto']
+  #       isStartup = false
+  #       return resolve(true)
+  #     return resolve(false)
 
   init: () ->
     @updateFontDisposable = atom.config.observe 'ambiance-pro-ui.fontFamily', @updateFont

@@ -9,11 +9,6 @@
 // }
 
 .btn-background (@color, @text-color) {
-  // TODO:
-  // transition: all 200ms @ease-out-quad
-  border: 1px solid;
-  border-radius: 3px;
-  // padding: 5px 8px 6px;
   .gtk-button(normal, @color, @text-color);
   &:hover {
     .gtk-button(hover, @color, @text-color);
@@ -39,6 +34,9 @@
 
 .btn {
   .btn-background(@button-background-color, @text-color);
+  // padding-bottom: 15px;
+  line-height: 18px;
+  height: auto;
 }
 .btn-group {
   & > .btn, & > .btn.selected {
