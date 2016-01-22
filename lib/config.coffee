@@ -80,16 +80,16 @@ class ThemeConfig
     @updateFontDisposable = atom.config.observe 'ambiance-pro-ui.fontFamily', @updateFont
     @updateFontSizeDisposable = atom.config.observe 'ambiance-pro-ui.fontSize', @updateFontSize
     @updateIconsDisposable = atom.config.observe 'ambiance-pro-ui.iconTheme', @updateIcons
-    @setThemeDisposable = atom.config.onDidChange 'ambiance-pro-ui.theme', @setTheme
+    # @setThemeDisposable = atom.config.onDidChange 'ambiance-pro-ui.theme', @setTheme
 
     @onDidChangeActiveThemesDisposable = atom.themes.onDidChangeActiveThemes @refresh
-    return @setTheme()
+    # return @setTheme()
 
   destroy: () ->
     @updateFontDisposable.dispose()
     @updateFontSizeDisposable.dispose()
     @updateIconsDisposable.dispose()
-    @setThemeDisposable.dispose()
+    # @setThemeDisposable.dispose()
     @onDidChangeActiveThemesDisposable.dispose()
 
   refresh: () =>
