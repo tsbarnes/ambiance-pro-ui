@@ -1,4 +1,5 @@
 @import "ui-variables";
+@import "syntax-variables";
 
 @tab-top-margin: 3px;
 @tab-height: 32px;
@@ -49,6 +50,7 @@
     color: @tab-bar-text-color;
     position: relative;
     z-index: 0;
+    border-radius:3px;
 
     // margin-left: 4px;
     // margin-right: 4px;
@@ -105,6 +107,12 @@
       border-image-repeat: stretch;
       margin-top: 1px;
       margin-bottom: -1px;
+
+      &[data-type="TextEditor"] {
+        background-image: linear-gradient(to bottom, @tab-background-color-active, @syntax-background-color 40%);
+        background-origin: border-box;
+        color: @syntax-text-color;
+      }
 
       .title {
         padding-bottom: 1px;
