@@ -1,5 +1,6 @@
 @import "ui-variables";
 @import "ui-mixins";
+@import "syntax-variables";
 
 .status { .text(normal); }
 .status-added { .text(info); }
@@ -7,3 +8,50 @@
 .status-modified { .text(warning); }
 .status-removed { .text(error); }
 .status-renamed { .text(success); }
+
+.git-control {
+  background-color: @app-background-color;
+
+  .content {
+    .sidebar {
+      background-color: @tree-view-background-color;
+      border-color: @tree-view-border-color;
+    }
+
+    .domain {
+      background-color: @inset-panel-background-color;
+      color: @text-color;
+    }
+  }
+
+  .logger {
+    background-color: @inset-panel-background-color;
+    border-color: @inset-panel-border-color;
+
+    pre {
+      background: none;
+    }
+  }
+
+  .diff {
+    .line {
+      pre.lineno {
+        color: @text-color-highlight;
+      }
+
+      &.heading {
+        background-color: @background-color-info;
+        color: @text-color-info;
+      }
+
+      &.subtle {
+        color: @text-color-subtle;
+      }
+    }
+  }
+
+  .dialog {
+    background-color: @app-background-color;
+    color: @text-color;
+  }
+}
