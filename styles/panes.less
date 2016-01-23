@@ -11,8 +11,12 @@ atom-pane-container {
     &:focus {
       background-color: @app-background-color;
     }
-    .item-views .pane-item {
-      background-color: transparent;
+    .item-views {
+      border-top: 3px solid @app-background-color;
+
+      .pane-item {
+        background-color: transparent;
+      }
     }
   }
 

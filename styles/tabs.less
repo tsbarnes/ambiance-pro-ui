@@ -18,7 +18,7 @@
 
 .tab-bar {
   height: auto;
-  background: @tab-bar-background;
+  background: @tab-bar-background-color;
   box-shadow: @tab-bar-shadow;
   display: -webkit-flex;
   display: flex;
@@ -45,6 +45,7 @@
     // padding-right: 30px;
     // font-weight: bold;
     font-size: inherit;
+    background: @tab-background-color;
     color: @tab-bar-text-color;
     position: relative;
     z-index: 0;
@@ -52,16 +53,15 @@
     // margin-left: 4px;
     // margin-right: 4px;
 
-    // border: 1px solid @tab-bar-border-color;
+    // border: 0 1px solid alpha(shade(@bg_color, 0.9), 0.5);
     // border-top: 2px;
 
-    border-image: linear-gradient(left top, left bottom,
-                                 from(alpha(shade(@bg_color, 0.9), 0.0)),
-                                 to(shade(@bg_color, 0.9))) 1;
-    border-image-width: 0 1px;
+    // border-image-source: linear-gradient(to bottom,
+    //                             alpha(shade(@bg_color, 0.9), 0.0),
+    //                             shade(@bg_color, 0.9));
+    // border-image-width: 0 1px;
 
     .title {
-      // border-bottom-width: 1px;
       opacity: 0.8;
       &::before {
         font-weight: normal;
@@ -94,10 +94,10 @@
       color: @tab-bar-text-color-active;
       // border-bottom-width: 3px;
       // background-color: @bg_color;
-      border-color: @focus_color;
+      // border-color: @focus_color;
       // border-top-width: 1px;
       // border-bottom-width: 0;
-      background-color: @focus_bg_color;
+      background: @tab-background-color-active;
       // padding-bottom: 3px;
       border-image-source: url(atom://ambiance-pro-ui/assets/notebook-tab-top.png);
       border-image-slice: 8 10 1 10;
@@ -107,6 +107,7 @@
       margin-bottom: -1px;
 
       .title {
+        padding-bottom: 1px;
         opacity: 1;
       }
     }
