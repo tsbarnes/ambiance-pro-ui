@@ -31,13 +31,13 @@
   @backdrop_selected_bg_color: shade(@bg_color, 0.92);
   @backdrop_selected_fg_color: @fg_color;
   @backdrop_filling_bg: #b0b0b0;
-  @focus_color: alpha(@selected_bg_color, 0.5);
-  @focus_bg_color: alpha(@selected_bg_color, 0.1);
-  @shadow_color: alpha(black, 0.5);
+  @focus_color: fade(@selected_bg_color, 0.5);
+  @focus_bg_color: fade(@selected_bg_color, 0.1);
+  @shadow_color: fade(black, 0.5);
   @osd_fg_color: #eeeeec;
-  @osd_bg_color: alpha(#202526, 0.7);
-  @osd_border_color: alpha(black, 0.7);
-  @scrollbar_track_color: mix(@base_color, black, 0.1); /* #e6e6e6 */
+  @osd_bg_color: fade(#202526, 0.7);
+  @osd_border_color: fade(black, 0.7);
+  @scrollbar_track_color: fade(mix(@base_color, black, 0.1), 0.1); /* #e6e6e6 */
 }
 .gtk_colors();
 // end of gtk core colors
@@ -53,8 +53,6 @@
 @insensitive_borders_color: @borders_color;
 
 @sidebar_bg_color: white;
-
-@scrollbar_bg_color: alpha(@scrollbar_track_color, 0.1);
 
 // Colors
 
@@ -137,7 +135,7 @@
 @ui-site-color-5: #f5e11d; // yellow
 @ui-error-color: @error_color; // red
 
-@scrollbar-background-color: @scrollbar_bg_color;
+@scrollbar-background-color: @bg_color;
 @scrollbar-color: mix(@selected_bg_color, @bg_color, 60%);
 @scrollbar-color-hover: mix(@selected_bg_color, @bg_color, 80%);
 
