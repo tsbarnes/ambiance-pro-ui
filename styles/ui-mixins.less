@@ -146,7 +146,7 @@
 
   padding: 5px 6px;
 
-  background-image: linear-gradient(left top, left bottom,
+  background: -webkit-gradient(linear, left top, left bottom,
                                    from(shade(@c, 1.08)),
                                    color-stop(0.5, @c),
                                    to(shade(@c, 0.94)));
@@ -167,7 +167,7 @@
   // hovered button
   .gtk-button(normal, @c, @tc, @edge);
 
-  background-image: linear-gradient(left top, left bottom,
+  background: -webkit-gradient(linear, left top, left bottom,
                                    from(shade(@c, 1.12)),
                                    color-stop(0.5, @c),
                                    to(shade(@c, 0.96)));
@@ -177,7 +177,7 @@
   // pushed button
   .gtk-button(normal, @c, @tc, @edge);
 
-  background-image: linear-gradient(left top, left bottom,
+  background: -webkit-gradient(linear, left top, left bottom,
                                    from (#dcdcdc),
                                    to (#f3f3f3));
   border-image-source: url(atom://ambiance-pro-ui/assets/button-active-hover.png);
